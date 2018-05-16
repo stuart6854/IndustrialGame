@@ -17,7 +17,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         item = _item;
         slot = _slot;
 
-        //icon.sprite = item.icon;
+        icon.sprite = item.icon;
     }    
 
     public void OnBeginDrag(PointerEventData eventData) {
