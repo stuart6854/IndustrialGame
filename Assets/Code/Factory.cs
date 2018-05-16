@@ -9,7 +9,7 @@ public class Factory : MonoBehaviour {
     private Block[,,] factory;
 
 	void Start () {
-        
+		LoadFactory ();
 	}
 	
     private void LoadFactory() {
@@ -25,7 +25,7 @@ public class Factory : MonoBehaviour {
     }
 
 	void Update () {
-	    	
+	    
 	}
     
     public void SetBlock(int x, int y, int z, Block block) {
@@ -35,5 +35,10 @@ public class Factory : MonoBehaviour {
     public Block GetBlock(int x, int y, int z) {
         return factory[x, y, z];
     }
+
+	public void OnDrawGizmos(){
+		Vector3 pos = transform.position + Vector3.one * factorySize * 0.5f;
+		Gizmos.DrawWireCube (pos, Vector3.one * factorySize);
+	}
 
 }
