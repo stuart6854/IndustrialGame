@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler {
+public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
     public Item item;
     public Image icon;
@@ -20,12 +20,13 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
         //icon.sprite = item.icon;
     }    
 
-    public void OnPointerDown(PointerEventData eventData) {
+    public void OnBeginDrag(PointerEventData eventData) {
+        print("OnPointerDown");
         if(item != null) {
-            offset = eventData.position - (Vector2)transform.position;
-            transform.SetParent(transform.parent.parent);
-            transform.position = eventData.position;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
+            offset = eventData.position - (Vector2)transform.position;
+            transform.SetParent(transform.GetComponentInParent<Canvas>().transform);
+            transform.position = eventData.position;
         }
     }
 
@@ -36,7 +37,8 @@ public class ItemData : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDr
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        transform.SetParent(Inventory.instance.inventoryUI.slots[slot].transform);
+        print("OnEndDrag");
+        transform.SetParent(Inventory.instance.inventoryUI.GetSlot(slot).transform);
         transform.localPosition = Vector2.zero;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }

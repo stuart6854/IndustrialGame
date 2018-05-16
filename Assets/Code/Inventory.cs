@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    public static Inventory instance;
+    public static Inventory instance { get; private set; }
+
+    public static readonly int hotbarSlotAmnt = 10;     //Amount of items that can be held
+    public static readonly int inventorySlotAmnt = 30;  //Amount of items that can be held
+    
     public InventoryUI inventoryUI { get; private set; }
 
-    public int slotAmount = 30; //Amount of items that can be held
+    public readonly int totalSlotAmnt = hotbarSlotAmnt + inventorySlotAmnt;
 
-    public List<Item> items = new List<Item>();
+    private List<Item> items = new List<Item>();
 
     private void Awake() {
         if(instance != null)
@@ -20,7 +24,7 @@ public class Inventory : MonoBehaviour {
     }
 
     private void Start() {
-        for(int i = 0; i < slotAmount; i++)
+        for(int i = 0; i < totalSlotAmnt; i++)
             items.Add(new Item());
 
         Item item = new Item();
@@ -29,17 +33,27 @@ public class Inventory : MonoBehaviour {
     }
 
     public void AddItem(Item _item) {
-        for(int i = 0; i < slotAmount; i++) {
+        for(int i = 0; i < totalSlotAmnt; i++) {
             if(items[i].id != -1)
                 continue;
             
             items[i] = _item;
-            if(_item.id != -1)
-                inventoryUI.AddItem(i, _item);
+            if(_item.id != -1) {
+                if(i < hotbarSlotAmnt)
+                    inventoryUI.AddItem(i, _item);
+            }
 
             break;
         }
 
+    }
+
+    public void SetSlot(int _slot, Item _item) {
+        items[_slot] = _item;
+    }
+
+    public Item GetSlot(int _slot) {
+        return items[_slot];
     }
 
     public void Remove(Item _item) {
