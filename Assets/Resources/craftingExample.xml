@@ -1,0 +1,42 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        "#  ",
+        " S ",
+        "  #"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:oak_log"
+        },
+        "S": {
+            "item": "minecraft:spruce_planks"
+        }
+    },
+    "result": {
+        "item": "minecraft:crafting_table",
+        "count": 1
+    }
+}
+
+
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        "#S ",
+        "#  ",
+        "   "
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:oak_log"
+        },
+        "S": {
+            "item": "minecraft:spruce_planks"
+        }
+    },
+    "result": {
+        "item": "minecraft:crafting_table",
+        "count": 1
+    }
+}
