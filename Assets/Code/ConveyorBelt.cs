@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyorBelt : MonoBehaviour {
+public class ConveyorBelt : Block {
 
     public GameObject tempItemPrefab;
 
@@ -65,10 +65,6 @@ public class ConveyorBelt : MonoBehaviour {
             float sepDist = newItemObj.GetComponent<BoxCollider>().size.z / 2f * newItemObj.transform.localScale.z;
             sepDist += leadItem.GetObject().GetComponent<BoxCollider>().size.z / 2f * leadItem.GetObject().transform.localScale.z;
             sepDist += ITEM_EXTRA_DIST;
-
-            print("newItem: " + newItemObj.GetComponent<BoxCollider>().size.z * newItemObj.transform.localScale.z);
-            print("leadItem: " + leadItem.GetObject().GetComponent<BoxCollider>().size.z * leadItem.GetObject().transform.localScale.z);
-
             if(Vector3.Distance(inputPos.position, leadItem.GetObject().transform.position) < sepDist) {
                 _item.DestroyObject();
                 return false;

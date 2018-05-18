@@ -8,7 +8,6 @@ public class ItemSlotUI : MonoBehaviour, IDropHandler {
     public int id;
 
     public void OnDrop(PointerEventData eventData) {
-        print("OnDrop");
         ItemData droppedItem = eventData.pointerDrag.GetComponent<ItemData>();
         if(Inventory.instance.GetSlot(id).id == -1) {
             Inventory.instance.SetSlot(droppedItem.slot, new Item());

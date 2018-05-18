@@ -21,7 +21,6 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }    
 
     public void OnBeginDrag(PointerEventData eventData) {
-        print("OnPointerDown");
         if(item != null) {
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             offset = eventData.position - (Vector2)transform.position;
@@ -37,7 +36,6 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        print("OnEndDrag");
         transform.SetParent(Inventory.instance.inventoryUI.GetSlot(slot).transform);
         transform.localPosition = Vector2.zero;
         GetComponent<CanvasGroup>().blocksRaycasts = true;

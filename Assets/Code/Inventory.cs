@@ -39,8 +39,7 @@ public class Inventory : MonoBehaviour {
             
             items[i] = _item;
             if(_item.id != -1) {
-                if(i < hotbarSlotAmnt)
-                    inventoryUI.AddItem(i, _item);
+                inventoryUI.AddItem(i, _item);
             }
 
             break;
