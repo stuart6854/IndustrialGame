@@ -4,40 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class ItemData : MonoBehaviour {
 
     public Item item;
-    public Image icon;
+    public Text itemName;
+    public Text itemAmnt;
 
-    public int slot;
-    
-    private Vector2 offset;
-
-    public void SetItem(Item _item, int _slot) {
+    public void SetItem(Item _item) {
         item = _item;
-        slot = _slot;
 
-        icon.sprite = item.icon;
-    }    
-
-    public void OnBeginDrag(PointerEventData eventData) {
-        if(item != null) {
-            GetComponent<CanvasGroup>().blocksRaycasts = false;
-            offset = eventData.position - (Vector2)transform.position;
-            transform.SetParent(transform.GetComponentInParent<Canvas>().transform);
-            transform.position = eventData.position;
-        }
+        itemName.text = item.itemName;
+        itemAmnt.text = "" + item.amnt;
     }
 
-    public void OnDrag(PointerEventData eventData) {
-        if(item != null) {
-            transform.position = eventData.position - offset;
-        }
-    }
-
-    public void OnEndDrag(PointerEventData eventData) {
-        transform.SetParent(Inventory.instance.inventoryUI.GetSlot(slot).transform);
-        transform.localPosition = Vector2.zero;
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
-    }
 }

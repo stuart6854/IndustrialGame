@@ -19,6 +19,8 @@ public class Inventory : MonoBehaviour {
         if(instance != null)
             Destroy(this);
 
+        ItemDatabase.InitDatabase();
+
         instance = this;
         inventoryUI = FindObjectOfType<InventoryUI>();
     }
@@ -26,19 +28,18 @@ public class Inventory : MonoBehaviour {
     private void Start() {
         for(int i = 0; i < totalSlotAmnt; i++)
             items.Add(new Item());
-
-        Item item = new Item();
-        item.id = 1;
-        AddItem(item);
+        
+        AddItem(ItemDatabase.GetItem("wood", 5));
+        AddItem(ItemDatabase.GetItem("metal", 128));
     }
 
     public void AddItem(Item _item) {
         for(int i = 0; i < totalSlotAmnt; i++) {
-            if(items[i].id != -1)
+            if(items[i].itemSlug != "")
                 continue;
             
             items[i] = _item;
-            if(_item.id != -1) {
+            if(_item.itemSlug != "") {
                 inventoryUI.AddItem(i, _item);
             }
 

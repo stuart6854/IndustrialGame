@@ -20,18 +20,17 @@ public class Storage : MonoBehaviour {
             items.Add(new Item());
 
         Item item = new Item();
-        item.id = 1;
         AddItem(item);
     }
 
 
     public void AddItem(Item _item) {
         for(int i = 0; i < storageSize; i++) {
-            if(items[i].id != -1)
+            if(items[i].itemSlug != "")
                 continue;
 
             items[i] = _item;
-            if(_item.id != -1) {
+            if(_item.itemSlug != "") {
                 //storageUI.AddItem(i, _item);
             }
 

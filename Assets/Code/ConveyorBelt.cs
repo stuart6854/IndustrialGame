@@ -40,13 +40,13 @@ public class ConveyorBelt : Block {
                     continue;
             }
 
-            currentItem.beltTime = Mathf.Clamp01(currentItem.beltTime + Time.deltaTime * CONVEYOR_SPEED);
-            currentItemObj.transform.position =  GetPoint(currentItem.beltTime);
-            currentItemObj.transform.LookAt(GetPoint(currentItem.beltTime + Time.deltaTime));
+            //currentItem.beltTime = Mathf.Clamp01(currentItem.beltTime + Time.deltaTime * CONVEYOR_SPEED);
+            //currentItemObj.transform.position =  GetPoint(currentItem.beltTime);
+            //currentItemObj.transform.LookAt(GetPoint(currentItem.beltTime + Time.deltaTime));
 
-            if(currentItem.beltTime >= 1) {
-                toOutput.Add(currentItem);
-            }
+            //if(currentItem.beltTime >= 1) {
+            //    toOutput.Add(currentItem);
+            //}
         }
 
         foreach(Item item in toOutput) {
@@ -71,7 +71,7 @@ public class ConveyorBelt : Block {
             }
         }
         newItemObj.SetActive(true); //Re-enable
-        _item.beltTime = 0;
+        //_item.beltTime = 0;
         beltItems.Add(_item);
 
         return true;

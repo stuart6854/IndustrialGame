@@ -1,0 +1,16 @@
+[
+    {
+        "itemSlug" : "wood",
+        "itemName" : "Wood",
+        "description" : "Some sort of Wood",
+        "icon" : "woodIcon.png"
+
+    },
+    {
+        "itemSlug" : "metal",
+        "itemName" : "Metal",
+        "description" : "Some sort of Metal",
+        "icon" : "metalIcon.png"
+
+    }
+]

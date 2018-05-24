@@ -4,17 +4,38 @@ using UnityEngine;
 
 public class Item {
 
-    public int id = -1;
-    public string itemSlug; //Item Dictionary Identifier
-    public Sprite icon;
+    public string itemSlug;
+    public string itemName;
+    public string description;
 
-    private GameObject obj;
-    public float beltTime;
+    public string icon;
+
+    public int amnt;
+
+    //private GameObject obj;
+    //public float beltTime;
+
+    public Item() {
+        itemSlug = "";
+        itemName = "null_item_name";
+        description = "null_item_desc";
+    }
+
+    public Item(Item _copyFrom) {
+        itemSlug = _copyFrom.itemSlug;
+        itemName = _copyFrom.itemName;
+        description = _copyFrom.description;
+        icon = _copyFrom.icon;
+    }
+
+    public Item(Item _copyFrom, int _amnt) : this(_copyFrom) {
+        amnt = _amnt;
+    }
 
     public GameObject CreateItemObj(Vector3 pos) {
         DestroyObject();
 
-        obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
         obj.transform.position = pos;
         obj.transform.localScale = new Vector3(0.1f, 0.1f, 0.2f);
         obj.AddComponent<BoxCollider>();
@@ -24,11 +45,11 @@ public class Item {
     }
 
     public GameObject GetObject() {
-        return obj;
+        return null;// obj;
     }
 
     public void DestroyObject() {
-        Object.Destroy(obj);
+        //Object.Destroy(obj);
     }
 
 }
