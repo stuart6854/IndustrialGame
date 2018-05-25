@@ -4,39 +4,35 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour {
 
-    public int storageSize = 50;
+    public int storageSize;
 
-    public StorageUI storageUI { get; private set; }
+    public StorageUI storageUI;
 
     private List<Item> items = new List<Item>();
 
-    private void Awake() {
-        storageUI = FindObjectOfType<StorageUI>();
-    }
-
     void Start () {
-        storageUI.ClearSlots();
-        for(int i = 0; i < storageSize; i++)
-            items.Add(new Item());
-
-        Item item = new Item();
-        AddItem(item);
+        AddItem(ItemDatabase.GetItem("wood", 5));
+        AddItem(ItemDatabase.GetItem("metal", 128));
     }
 
+    public void AddItems(Item[] _items) {
+        foreach(Item item in _items)
+            AddItem(item, false);
 
-    public void AddItem(Item _item) {
-        for(int i = 0; i < storageSize; i++) {
-            if(items[i].itemSlug != "")
-                continue;
+        RefreshUI();
+    }
 
-            items[i] = _item;
-            if(_item.itemSlug != "") {
-                //storageUI.AddItem(i, _item);
-            }
+    public bool AddItem(Item _item, bool refreshUI = true) {
+        if(_item.itemSlug == "") 
+            return false; // Dont add blank items
+        
+        if(items.Count < storageSize)
+            items.Add(_item);
 
-            break;
-        }
+        if(refreshUI)
+            RefreshUI();
 
+        return true;
     }
 
     public void SetSlot(int _slot, Item _item) {
@@ -49,6 +45,11 @@ public class Storage : MonoBehaviour {
 
     public void Remove(Item _item) {
         items.Remove(_item);
+    }
+
+    private void RefreshUI() {
+        if(storageUI.IsVisible())
+            storageUI.RefreshUI(items);
     }
 
 }
